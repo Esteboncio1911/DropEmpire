@@ -102,7 +102,6 @@
             background: rgba(102, 126, 234, 0.1);
         }
 
-        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
@@ -241,7 +240,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Case Opening Modal */
         .opening-modal {
             display: none;
             position: fixed;
@@ -353,7 +351,6 @@
             margin-bottom: 2rem;
         }
 
-        /* Battles Section */
         .battles-container {
             max-width: 1400px;
             margin: 0 auto;
@@ -420,7 +417,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Upgrade Section */
         .upgrade-container {
             max-width: 1000px;
             margin: 0 auto;
@@ -479,7 +475,6 @@
             transition: width 0.3s;
         }
 
-        /* Inventory */
         .inventory-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -510,7 +505,7 @@
         }
 
         @media (max-width: 768px) {
-            .nav-links { display: none; }
+            .nav-links { gap: 1rem; font-size: 0.9rem; }
             .cases-grid { grid-template-columns: 1fr; }
             .battle-players { grid-template-columns: 1fr; }
             .vs-text { margin: 1rem 0; }
@@ -519,10 +514,9 @@
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar">
         <div class="logo" onclick="showHome()">💎 DROPEMPIRE</div>
-        <ul class="nav-links" id="nav-menu">
+        <ul class="nav-links" id="nav-menu" style="display: none;">
             <li><a onclick="showSection('cases')">Cajas</a></li>
             <li><a onclick="showSection('battles')">Batallas</a></li>
             <li><a onclick="showSection('upgrade')">Upgrade</a></li>
@@ -533,7 +527,6 @@
         <button class="btn-primary" id="logout-btn" onclick="logout()" style="display: none;">Cerrar Sesión</button>
     </nav>
 
-    <!-- Login Modal -->
     <div class="modal" id="login-modal">
         <div class="modal-content">
             <h2 class="modal-title">🎮 Iniciar Sesión</h2>
@@ -549,7 +542,6 @@
         </div>
     </div>
 
-    <!-- Case Opening Modal -->
     <div class="opening-modal" id="opening-modal">
         <div class="opening-container">
             <div class="roulette-container">
@@ -565,7 +557,6 @@
         </div>
     </div>
 
-    <!-- Home Page -->
     <section class="hero" id="home-section">
         <div style="text-align: center; z-index: 1; position: relative;">
             <h1 style="font-size: 4rem; margin-bottom: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">ABRE CAJAS ÉPICAS</h1>
@@ -574,7 +565,6 @@
         </div>
     </section>
 
-    <!-- Cases Section -->
     <div class="app-container" id="cases-section">
         <div class="section-header">
             <h2>🎁 ABRIR CAJAS</h2>
@@ -582,7 +572,6 @@
         <div class="cases-grid" id="cases-grid"></div>
     </div>
 
-    <!-- Battles Section -->
     <div class="app-container" id="battles-section">
         <div class="section-header">
             <h2>⚔️ BATALLAS</h2>
@@ -606,7 +595,6 @@
         </div>
     </div>
 
-    <!-- Upgrade Section -->
     <div class="app-container" id="upgrade-section">
         <div class="section-header">
             <h2>⬆️ UPGRADE</h2>
@@ -634,7 +622,6 @@
         </div>
     </div>
 
-    <!-- Inventory Section -->
     <div class="app-container" id="inventory-section">
         <div class="section-header">
             <h2>🎒 INVENTARIO</h2>
@@ -643,7 +630,6 @@
     </div>
 
     <script>
-        // Game State
         let gameState = {
             loggedIn: false,
             username: '',
@@ -651,13 +637,12 @@
             inventory: []
         };
 
-        // Cases Data
         const cases = [
             { id: 1, name: 'Caja Starter', icon: '📦', price: 10, items: [
                 { name: 'Skin Común', icon: '🔵', value: 5, rarity: 'common' },
-                { name: 'Skin Común', icon: '🔵', value: 8, rarity: 'common' },
+                { name: 'Skin Común Plus', icon: '🔵', value: 8, rarity: 'common' },
                 { name: 'Skin Raro', icon: '🟣', value: 15, rarity: 'rare' },
-                { name: 'Skin Épico', icon: '🟣', value: 25, rarity: 'epic' }
+                { name: 'Skin Épico', icon: '💜', value: 25, rarity: 'epic' }
             ]},
             { id: 2, name: 'Caja Legendaria', icon: '🔥', price: 50, items: [
                 { name: 'Skin Raro', icon: '🟣', value: 30, rarity: 'rare' },
@@ -691,13 +676,11 @@
             ]}
         ];
 
-        // Initialize
         function init() {
             renderCases();
             updateBalance();
         }
 
-        // Login/Register
         function showLoginModal() {
             document.getElementById('login-modal').classList.add('active');
         }
@@ -720,7 +703,7 @@
         }
 
         function register() {
-            login(); // Simplified registration
+            login();
         }
 
         function logout() {
@@ -755,7 +738,6 @@
             document.getElementById('user-balance').textContent = '$' + gameState.balance.toFixed(2);
         }
 
-        // Render Cases
         function renderCases() {
             const grid = document.getElementById('cases-grid');
             grid.innerHTML = cases.map(c => `
@@ -768,7 +750,6 @@
             `).join('');
         }
 
-        // Open Case
         function openCase(caseId) {
             const caseData = cases.find(c => c.id === caseId);
             
@@ -780,18 +761,15 @@
             gameState.balance -= caseData.price;
             updateBalance();
             
-            // Show opening modal
             document.getElementById('opening-modal').classList.add('active');
             document.getElementById('result-container').classList.remove('active');
             
-            // Generate roulette items
             const rouletteItems = [];
             for (let i = 0; i < 50; i++) {
                 const item = caseData.items[Math.floor(Math.random() * caseData.items.length)];
                 rouletteItems.push(item);
             }
             
-            // Pick winner (weighted)
             const weights = [50, 30, 15, 5];
             const random = Math.random() * 100;
             let winnerIndex = 0;
@@ -806,7 +784,6 @@
             const winner = caseData.items[winnerIndex];
             rouletteItems[45] = winner;
             
-            // Render roulette
             const rouletteContainer = document.getElementById('roulette-items');
             rouletteContainer.innerHTML = rouletteItems.map(item => `
                 <div class="roulette-item ${item.rarity}">
@@ -816,13 +793,11 @@
                 </div>
             `).join('');
             
-            // Animate roulette
             setTimeout(() => {
                 const offset = -(45 * 166) + (window.innerWidth / 2) - 75;
                 rouletteContainer.style.transform = `translateX(${offset}px)`;
             }, 100);
             
-            // Show result
             setTimeout(() => {
                 gameState.inventory.push({ ...winner, id: Date.now() });
                 gameState.balance += winner.value;
@@ -845,7 +820,6 @@
             }, 50);
         }
 
-        // Battles
         function startBattle(mode) {
             const arena = document.getElementById('battle-arena');
             arena.style.display = 'block';
@@ -853,24 +827,6 @@
             const opponents = mode === '1v1' ? 1 : mode === '2v2' ? 3 : Math.floor(Math.random() * 3) + 2;
             const playerValue = Math.random() * 500 + 100;
             const opponentValues = Array(opponents).fill(0).map(() => Math.random() * 500 + 100);
-            
-            setTimeout(() => {
-                const maxValue = Math.max(playerValue, ...opponentValues);
-                const winner = playerValue === maxValue ? gameState.username : 'Oponente';
-                
-                if (winner === gameState.username) {
-                    const prize = opponentValues.reduce((a, b) => a + b, 0);
-                    gameState.balance += prize;
-                    updateBalance();
-                    alert(`¡Ganaste! +${prize.toFixed(2)}`);
-                } else {
-                    gameState.balance -= playerValue;
-                    updateBalance();
-                    alert(`Perdiste -${playerValue.toFixed(2)}`);
-                }
-                
-                arena.style.display = 'none';
-            }, 3000);
             
             arena.innerHTML = `
                 <div class="battle-players">
@@ -890,9 +846,26 @@
                     <div style="font-size: 1.5rem; color: #667eea;">⚔️ Batalla en progreso...</div>
                 </div>
             `;
+            
+            setTimeout(() => {
+                const maxValue = Math.max(playerValue, ...opponentValues);
+                const winner = playerValue === maxValue ? gameState.username : 'Oponente';
+                
+                if (winner === gameState.username) {
+                    const prize = opponentValues.reduce((a, b) => a + b, 0);
+                    gameState.balance += prize;
+                    updateBalance();
+                    alert('¡Ganaste! + + prize.toFixed(2));
+                } else {
+                    gameState.balance -= playerValue;
+                    updateBalance();
+                    alert('Perdiste - + playerValue.toFixed(2));
+                }
+                
+                arena.style.display = 'none';
+            }, 3000);
         }
 
-        // Upgrade System
         let selectedUpgradeItem = null;
 
         function renderInventory() {
@@ -916,7 +889,6 @@
             const item = gameState.inventory.find(i => i.id === itemId);
             
             if (document.getElementById('upgrade-section').classList.contains('active')) {
-                // Selecting for upgrade
                 selectedUpgradeItem = item;
                 document.getElementById('item-slot').innerHTML = `
                     <div style="font-size: 3rem; margin-bottom: 0.5rem;">${item.icon}</div>
@@ -924,7 +896,6 @@
                     <div style="color: #4ade80; font-weight: bold;">${item.value}</div>
                 `;
                 
-                // Generate target item (higher value)
                 const targetValue = item.value * (Math.random() * 1.5 + 1.5);
                 const successRate = Math.max(10, Math.min(90, (item.value / targetValue) * 100));
                 
@@ -952,7 +923,6 @@
                 document.getElementById('success-fill').style.width = successRate + '%';
                 document.getElementById('upgrade-btn').disabled = false;
             } else {
-                // Selecting in inventory
                 document.querySelectorAll('.inventory-item').forEach(el => el.classList.remove('selected'));
                 event.target.closest('.inventory-item').classList.add('selected');
             }
@@ -963,21 +933,18 @@
             
             const success = Math.random() * 100 <= selectedUpgradeItem.target.successRate;
             
-            // Remove original item
             gameState.inventory = gameState.inventory.filter(i => i.id !== selectedUpgradeItem.id);
             
             if (success) {
-                // Add upgraded item
                 gameState.inventory.push({
                     ...selectedUpgradeItem.target,
                     id: Date.now()
                 });
-                alert(`¡Éxito! Has obtenido ${selectedUpgradeItem.target.name}`);
+                alert('¡Éxito! Has obtenido ' + selectedUpgradeItem.target.name);
             } else {
-                alert(`¡Fallaste! Has perdido ${selectedUpgradeItem.name}`);
+                alert('¡Fallaste! Has perdido ' + selectedUpgradeItem.name);
             }
             
-            // Reset upgrade UI
             selectedUpgradeItem = null;
             document.getElementById('item-slot').innerHTML = '<p style="color: #8b8ba7;">Selecciona un item de tu inventario</p>';
             document.getElementById('target-slot').innerHTML = '<p style="color: #8b8ba7;">Item objetivo</p>';
@@ -988,7 +955,6 @@
             renderInventory();
         }
 
-        // Initialize on load
         init();
     </script>
 </body>
