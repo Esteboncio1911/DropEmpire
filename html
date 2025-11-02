@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DropEmpire - Abre Cajas y Gana Premios Épicos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e27;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+            text-shadow: 0 0 10px rgba(102, 126, 234, 0.8);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(118, 75, 162, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+            animation: pulse 5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5)); }
+            50% { filter: drop-shadow(0 0 40px rgba(102, 126, 234, 0.8)); }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #b8b8d4;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: #8b8ba7;
+            margin-top: 0.5rem;
+        }
+
+        .cases-section {
+            padding: 5rem 2rem;
+            background: #0f1329;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .case-card {
+            background: linear-gradient(145deg, #1a1f3a 0%, #0f1329 100%);
+            border-radius: 20px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+
+        .case-card:hover::before {
+            opacity: 1;
+        }
+
+        .case-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .case-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 4rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .case-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .case-price {
+            font-size: 1.5rem;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .live-drops {
+            padding: 5rem 2rem;
+            background: #0a0e27;
+        }
+
+        .drops-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #1a1f3a 0%, #0f1329 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .drop-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 10px;
+            border-left: 3px solid #667eea;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .drop-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .drop-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .drop-prize {
+            color: #4ade80;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .features {
+            padding: 5rem 2rem;
+            background: #0f1329;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(145deg, #1a1f3a 0%, #0f1329 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .footer {
+            background: #0a0e27;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .floating-box {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border-radius: 15px;
+            animation: floatingBox 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes floatingBox {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -50px) rotate(90deg); }
+            50% { transform: translate(100px, 0) rotate(180deg); }
+            75% { transform: translate(50px, 50px) rotate(270deg); }
+        }
+
+        .floating-box:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-box:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
+        .floating-box:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 4s; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .stats { flex-direction: column; gap: 1.5rem; }
+            .nav-links { display: none; }
+            .cases-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-box"></div>
+    <div class="floating-box"></div>
+    <div class="floating-box"></div>
+
+    <nav class="navbar">
+        <div class="logo">💎 DROPEMPIRE</div>
+        <ul class="nav-links">
+            <li><a href="#casos">Casos</a></li>
+            <li><a href="#drops">Drops en Vivo</a></li>
+            <li><a href="#features">Características</a></li>
+        </ul>
+        <button class="btn-primary">Iniciar Sesión</button>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>ABRE CAJAS ÉPICAS</h1>
+            <p>Gana skins legendarios, artículos exclusivos y premios increíbles. La emoción nunca termina.</p>
+            <button class="btn-primary" style="font-size: 1.2rem; padding: 1rem 3rem;">ABRIR AHORA</button>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="users">125K+</div>
+                    <div class="stat-label">Usuarios Activos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="drops">2.5M+</div>
+                    <div class="stat-label">Drops Entregados</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="value">$15M+</div>
+                    <div class="stat-label">Valor en Premios</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cases-section" id="casos">
+        <h2 class="section-title">🎁 CAJAS DESTACADAS</h2>
+        <div class="cases-grid">
+            <div class="case-card">
+                <div class="case-image">🔥</div>
+                <div class="case-name">Caja Legendaria</div>
+                <div class="case-price">$49.99</div>
+            </div>
+            <div class="case-card">
+                <div class="case-image">💎</div>
+                <div class="case-name">Caja Elite</div>
+                <div class="case-price">$99.99</div>
+            </div>
+            <div class="case-card">
+                <div class="case-image">⚡</div>
+                <div class="case-name">Caja Lightning</div>
+                <div class="case-price">$29.99</div>
+            </div>
+            <div class="case-card">
+                <div class="case-image">👑</div>
+                <div class="case-name">Caja Imperial</div>
+                <div class="case-price">$149.99</div>
+            </div>
+            <div class="case-card">
+                <div class="case-image">🌟</div>
+                <div class="case-name">Caja Estelar</div>
+                <div class="case-price">$79.99</div>
+            </div>
+            <div class="case-card">
+                <div class="case-image">🎯</div>
+                <div class="case-name">Caja Precisión</div>
+                <div class="case-price">$39.99</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="live-drops" id="drops">
+        <h2 class="section-title">⚡ DROPS EN VIVO</h2>
+        <div class="drops-container" id="drops-container">
+            <div class="drop-item">
+                <div class="drop-user">
+                    <div class="drop-avatar">M</div>
+                    <div>
+                        <div style="font-weight: bold;">Miguel_Pro</div>
+                        <div style="color: #8b8ba7; font-size: 0.9rem;">Caja Elite</div>
+                    </div>
+                </div>
+                <div class="drop-prize">$1,250.00</div>
+            </div>
+            <div class="drop-item">
+                <div class="drop-user">
+                    <div class="drop-avatar">A</div>
+                    <div>
+                        <div style="font-weight: bold;">Ana_Gamer</div>
+                        <div style="color: #8b8ba7; font-size: 0.9rem;">Caja Legendaria</div>
+                    </div>
+                </div>
+                <div class="drop-prize">$875.50</div>
+            </div>
+            <div class="drop-item">
+                <div class="drop-user">
+                    <div class="drop-avatar">L</div>
+                    <div>
+                        <div style="font-weight: bold;">LuckyStar</div>
+                        <div style="color: #8b8ba7; font-size: 0.9rem;">Caja Imperial</div>
+                    </div>
+                </div>
+                <div class="drop-prize">$2,100.00</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <h2 class="section-title">🎮 ¿POR QUÉ DROPEMPIRE?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-title">100% Seguro</div>
+                <p style="color: #b8b8d4;">Transacciones protegidas y sistema anti-fraude avanzado</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-title">Retiros Instantáneos</div>
+                <p style="color: #b8b8d4;">Recibe tus premios al instante, sin esperas</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎁</div>
+                <div class="feature-title">Premios Épicos</div>
+                <p style="color: #b8b8d4;">Miles de skins y artículos exclusivos disponibles</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💯</div>
+                <div class="feature-title">Odds Justos</div>
+                <p style="color: #b8b8d4;">Probabilidades verificables y transparentes</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-title">Soporte 24/7</div>
+                <p style="color: #b8b8d4;">Equipo siempre disponible para ayudarte</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <div class="feature-title">Comunidad Global</div>
+                <p style="color: #b8b8d4;">Únete a millones de jugadores en todo el mundo</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div style="font-size: 2rem; margin-bottom: 1rem;">💎 DROPEMPIRE</div>
+        <p style="color: #8b8ba7; margin-bottom: 1rem;">La mejor experiencia de case opening</p>
+        <p style="color: #666; font-size: 0.9rem;">© 2024 DropEmpire. Todos los derechos reservados.</p>
+        <p style="color: #666; font-size: 0.8rem; margin-top: 1rem;">+18 | Juega responsablemente</p>
+    </footer>
+
+    <script>
+        // Animación de números en las estadísticas
+        function animateValue(id, start, end, duration, suffix = '') {
+            const element = document.getElementById(id);
+            const range = end - start;
+            const increment = range / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= end) {
+                    element.textContent = end + suffix;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString() + suffix;
+                }
+            }, 16);
+        }
+
+        // Simular nuevos drops en vivo
+        const nombres = ['Carlos', 'Sofia', 'Juan', 'Maria', 'Pedro', 'Laura', 'Diego', 'Elena'];
+        const cajas = ['Caja Elite', 'Caja Legendaria', 'Caja Imperial', 'Caja Estelar'];
+        
+        setInterval(() => {
+            const container = document.getElementById('drops-container');
+            const nombre = nombres[Math.floor(Math.random() * nombres.length)];
+            const caja = cajas[Math.floor(Math.random() * cajas.length)];
+            const premio = (Math.random() * 3000 + 100).toFixed(2);
+            const inicial = nombre.charAt(0);
+            
+            const newDrop = document.createElement('div');
+            newDrop.className = 'drop-item';
+            newDrop.innerHTML = `
+                <div class="drop-user">
+                    <div class="drop-avatar">${inicial}</div>
+                    <div>
+                        <div style="font-weight: bold;">${nombre}_${Math.floor(Math.random() * 999)}</div>
+                        <div style="color: #8b8ba7; font-size: 0.9rem;">${caja}</div>
+                    </div>
+                </div>
+                <div class="drop-prize">$${premio}</div>
+            `;
+            
+            container.insertBefore(newDrop, container.firstChild);
+            
+            if (container.children.length > 5) {
+                container.removeChild(container.lastChild);
+            }
+        }, 4000);
+
+        // Scroll suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
