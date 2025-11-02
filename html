@@ -38,13 +38,14 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+            cursor: pointer;
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -52,11 +53,21 @@
             text-decoration: none;
             transition: all 0.3s;
             font-weight: 500;
+            cursor: pointer;
         }
 
         .nav-links a:hover {
             color: #667eea;
             text-shadow: 0 0 10px rgba(102, 126, 234, 0.8);
+        }
+
+        .user-balance {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(102, 126, 234, 0.5);
+            font-weight: bold;
+            color: #4ade80;
         }
 
         .btn-primary {
@@ -76,8 +87,79 @@
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
         }
 
+        .btn-secondary {
+            background: transparent;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            border: 2px solid #667eea;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #1a1f3a 0%, #0f1329 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
         .hero {
-            height: 100vh;
+            min-height: 100vh;
+            padding-top: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -87,95 +169,24 @@
             background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.3) 0%, transparent 70%);
-            border-radius: 50%;
-            top: -200px;
-            right: -200px;
-            animation: pulse 4s ease-in-out infinite;
+        .app-container {
+            display: none;
+            padding-top: 80px;
+            min-height: 100vh;
         }
 
-        .hero::after {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(118, 75, 162, 0.3) 0%, transparent 70%);
-            border-radius: 50%;
-            bottom: -150px;
-            left: -150px;
-            animation: pulse 5s ease-in-out infinite;
+        .app-container.active {
+            display: block;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 0.8; }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            padding: 2rem;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5)); }
-            50% { filter: drop-shadow(0 0 40px rgba(102, 126, 234, 0.8)); }
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            color: #b8b8d4;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
+        .section-header {
             text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
         }
 
-        .stat-number {
+        .section-header h2 {
             font-size: 2.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-label {
-            color: #8b8ba7;
-            margin-top: 0.5rem;
-        }
-
-        .cases-section {
-            padding: 5rem 2rem;
-            background: #0f1329;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -187,6 +198,7 @@
             gap: 2rem;
             max-width: 1400px;
             margin: 0 auto;
+            padding: 2rem;
         }
 
         .case-card {
@@ -195,32 +207,13 @@
             padding: 1.5rem;
             cursor: pointer;
             transition: all 0.3s;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .case-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
-            border-radius: 20px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: -1;
-        }
-
-        .case-card:hover::before {
-            opacity: 1;
+            border: 2px solid rgba(102, 126, 234, 0.3);
         }
 
         .case-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+            border-color: #667eea;
         }
 
         .case-image {
@@ -233,12 +226,6 @@
             justify-content: center;
             margin-bottom: 1rem;
             font-size: 4rem;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
         }
 
         .case-name {
@@ -251,351 +238,758 @@
             font-size: 1.5rem;
             color: #667eea;
             font-weight: bold;
+            margin-bottom: 1rem;
         }
 
-        .live-drops {
-            padding: 5rem 2rem;
-            background: #0a0e27;
+        /* Case Opening Modal */
+        .opening-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
         }
 
-        .drops-container {
+        .opening-modal.active {
+            display: flex;
+        }
+
+        .opening-container {
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .roulette-container {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            background: linear-gradient(145deg, #1a1f3a 0%, #0f1329 100%);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .roulette-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, #667eea, transparent);
+            z-index: 10;
+            transform: translateX(-50%);
+        }
+
+        .roulette-items {
+            display: flex;
+            gap: 1rem;
+            padding: 2rem;
+            transition: transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+        }
+
+        .roulette-item {
+            min-width: 150px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            padding: 1rem;
+        }
+
+        .roulette-item.rare { border-color: #667eea; }
+        .roulette-item.epic { border-color: #a855f7; }
+        .roulette-item.legendary { border-color: #fbbf24; }
+
+        .item-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-name {
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 0.3rem;
+        }
+
+        .item-value {
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        .result-container {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(145deg, #1a1f3a 0%, #0f1329 100%);
+            border-radius: 20px;
+            display: none;
+        }
+
+        .result-container.active {
+            display: block;
+        }
+
+        .result-item {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-name {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            color: #4ade80;
+            font-weight: bold;
+            margin-bottom: 2rem;
+        }
+
+        /* Battles Section */
+        .battles-container {
             max-width: 1400px;
             margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .battle-modes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .battle-mode {
             background: linear-gradient(145deg, #1a1f3a 0%, #0f1329 100%);
             border-radius: 20px;
             padding: 2rem;
-            border: 1px solid rgba(102, 126, 234, 0.3);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .drop-item {
-            display: flex;
+        .battle-mode:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+        }
+
+        .battle-arena {
+            background: linear-gradient(145deg, #1a1f3a 0%, #0f1329 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .battle-players {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
             align-items: center;
-            justify-content: space-between;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            background: rgba(102, 126, 234, 0.1);
-            border-radius: 10px;
-            border-left: 3px solid #667eea;
-            animation: slideIn 0.5s ease-out;
+            margin-bottom: 2rem;
         }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
+        .player-side {
+            text-align: center;
         }
 
-        .drop-user {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .drop-avatar {
-            width: 40px;
-            height: 40px;
+        .player-avatar {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1rem;
+        }
+
+        .vs-text {
+            font-size: 3rem;
             font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .drop-prize {
-            color: #4ade80;
-            font-weight: bold;
-            font-size: 1.2rem;
+        /* Upgrade Section */
+        .upgrade-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
-        .features {
-            padding: 5rem 2rem;
-            background: #0f1329;
+        .upgrade-area {
+            background: linear-gradient(145deg, #1a1f3a 0%, #0f1329 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 2px solid rgba(102, 126, 234, 0.3);
         }
 
-        .features-grid {
+        .upgrade-slots {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr auto 1fr;
             gap: 2rem;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .upgrade-slot {
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .upgrade-arrow {
+            font-size: 3rem;
+            color: #667eea;
+        }
+
+        .success-rate {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .success-bar {
+            width: 100%;
+            height: 30px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .success-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ade80, #667eea);
+            transition: width 0.3s;
+        }
+
+        /* Inventory */
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            padding: 2rem;
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        .feature-card {
-            text-align: center;
-            padding: 2rem;
+        .inventory-item {
             background: linear-gradient(145deg, #1a1f3a 0%, #0f1329 100%);
-            border-radius: 20px;
-            border: 1px solid rgba(102, 126, 234, 0.3);
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: #667eea;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #667eea;
-        }
-
-        .footer {
-            background: #0a0e27;
-            padding: 3rem 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(102, 126, 234, 0.3);
-        }
-
-        .floating-box {
-            position: fixed;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
             border-radius: 15px;
-            animation: floatingBox 6s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
+            padding: 1rem;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
         }
 
-        @keyframes floatingBox {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(50px, -50px) rotate(90deg); }
-            50% { transform: translate(100px, 0) rotate(180deg); }
-            75% { transform: translate(50px, 50px) rotate(270deg); }
+        .inventory-item:hover {
+            transform: scale(1.05);
+            border-color: #667eea;
         }
 
-        .floating-box:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
-        .floating-box:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
-        .floating-box:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 4s; }
+        .inventory-item.selected {
+            border-color: #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+        }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .stats { flex-direction: column; gap: 1.5rem; }
             .nav-links { display: none; }
             .cases-grid { grid-template-columns: 1fr; }
+            .battle-players { grid-template-columns: 1fr; }
+            .vs-text { margin: 1rem 0; }
+            .upgrade-slots { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="floating-box"></div>
-    <div class="floating-box"></div>
-    <div class="floating-box"></div>
-
+    <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo">💎 DROPEMPIRE</div>
-        <ul class="nav-links">
-            <li><a href="#casos">Casos</a></li>
-            <li><a href="#drops">Drops en Vivo</a></li>
-            <li><a href="#features">Características</a></li>
+        <div class="logo" onclick="showHome()">💎 DROPEMPIRE</div>
+        <ul class="nav-links" id="nav-menu">
+            <li><a onclick="showSection('cases')">Cajas</a></li>
+            <li><a onclick="showSection('battles')">Batallas</a></li>
+            <li><a onclick="showSection('upgrade')">Upgrade</a></li>
+            <li><a onclick="showSection('inventory')">Inventario</a></li>
+            <li class="user-balance" id="user-balance">$0.00</li>
         </ul>
-        <button class="btn-primary">Iniciar Sesión</button>
+        <button class="btn-primary" id="login-btn" onclick="showLoginModal()">Iniciar Sesión</button>
+        <button class="btn-primary" id="logout-btn" onclick="logout()" style="display: none;">Cerrar Sesión</button>
     </nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>ABRE CAJAS ÉPICAS</h1>
-            <p>Gana skins legendarios, artículos exclusivos y premios increíbles. La emoción nunca termina.</p>
-            <button class="btn-primary" style="font-size: 1.2rem; padding: 1rem 3rem;">ABRIR AHORA</button>
-            
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number" id="users">125K+</div>
-                    <div class="stat-label">Usuarios Activos</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="drops">2.5M+</div>
-                    <div class="stat-label">Drops Entregados</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="value">$15M+</div>
-                    <div class="stat-label">Valor en Premios</div>
-                </div>
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <h2 class="modal-title">🎮 Iniciar Sesión</h2>
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Nombre de usuario">
             </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Contraseña">
+            </div>
+            <button class="btn-primary" onclick="login()" style="width: 100%; margin-bottom: 1rem;">Entrar</button>
+            <button class="btn-secondary" onclick="register()" style="width: 100%;">Registrarse</button>
+            <p style="margin-top: 1rem; color: #8b8ba7; font-size: 0.9rem;">🎁 Bono de bienvenida: $5,000</p>
+        </div>
+    </div>
+
+    <!-- Case Opening Modal -->
+    <div class="opening-modal" id="opening-modal">
+        <div class="opening-container">
+            <div class="roulette-container">
+                <div class="roulette-line"></div>
+                <div class="roulette-items" id="roulette-items"></div>
+            </div>
+            <div class="result-container" id="result-container">
+                <div class="result-item" id="result-icon"></div>
+                <div class="result-name" id="result-name"></div>
+                <div class="result-value" id="result-value"></div>
+                <button class="btn-primary" onclick="closeOpening()">Continuar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Page -->
+    <section class="hero" id="home-section">
+        <div style="text-align: center; z-index: 1; position: relative;">
+            <h1 style="font-size: 4rem; margin-bottom: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">ABRE CAJAS ÉPICAS</h1>
+            <p style="font-size: 1.3rem; margin-bottom: 2rem; color: #b8b8d4;">Gana skins legendarios, artículos exclusivos y premios increíbles</p>
+            <button class="btn-primary" onclick="showLoginModal()" style="font-size: 1.2rem; padding: 1rem 3rem;">COMENZAR AHORA</button>
         </div>
     </section>
 
-    <section class="cases-section" id="casos">
-        <h2 class="section-title">🎁 CAJAS DESTACADAS</h2>
-        <div class="cases-grid">
-            <div class="case-card">
-                <div class="case-image">🔥</div>
-                <div class="case-name">Caja Legendaria</div>
-                <div class="case-price">$49.99</div>
-            </div>
-            <div class="case-card">
-                <div class="case-image">💎</div>
-                <div class="case-name">Caja Elite</div>
-                <div class="case-price">$99.99</div>
-            </div>
-            <div class="case-card">
-                <div class="case-image">⚡</div>
-                <div class="case-name">Caja Lightning</div>
-                <div class="case-price">$29.99</div>
-            </div>
-            <div class="case-card">
-                <div class="case-image">👑</div>
-                <div class="case-name">Caja Imperial</div>
-                <div class="case-price">$149.99</div>
-            </div>
-            <div class="case-card">
-                <div class="case-image">🌟</div>
-                <div class="case-name">Caja Estelar</div>
-                <div class="case-price">$79.99</div>
-            </div>
-            <div class="case-card">
-                <div class="case-image">🎯</div>
-                <div class="case-name">Caja Precisión</div>
-                <div class="case-price">$39.99</div>
-            </div>
+    <!-- Cases Section -->
+    <div class="app-container" id="cases-section">
+        <div class="section-header">
+            <h2>🎁 ABRIR CAJAS</h2>
         </div>
-    </section>
+        <div class="cases-grid" id="cases-grid"></div>
+    </div>
 
-    <section class="live-drops" id="drops">
-        <h2 class="section-title">⚡ DROPS EN VIVO</h2>
-        <div class="drops-container" id="drops-container">
-            <div class="drop-item">
-                <div class="drop-user">
-                    <div class="drop-avatar">M</div>
-                    <div>
-                        <div style="font-weight: bold;">Miguel_Pro</div>
-                        <div style="color: #8b8ba7; font-size: 0.9rem;">Caja Elite</div>
+    <!-- Battles Section -->
+    <div class="app-container" id="battles-section">
+        <div class="section-header">
+            <h2>⚔️ BATALLAS</h2>
+        </div>
+        <div class="battles-container">
+            <div class="battle-modes">
+                <div class="battle-mode" onclick="startBattle('1v1')">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">🎯 1 vs 1</h3>
+                    <p style="color: #b8b8d4;">Enfréntate a otro jugador</p>
+                </div>
+                <div class="battle-mode" onclick="startBattle('2v2')">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">👥 2 vs 2</h3>
+                    <p style="color: #b8b8d4;">Batalla en equipos</p>
+                </div>
+                <div class="battle-mode" onclick="startBattle('royal')">
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">👑 Royal</h3>
+                    <p style="color: #b8b8d4;">Hasta 4 jugadores</p>
+                </div>
+            </div>
+            <div class="battle-arena" id="battle-arena" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Upgrade Section -->
+    <div class="app-container" id="upgrade-section">
+        <div class="section-header">
+            <h2>⬆️ UPGRADE</h2>
+        </div>
+        <div class="upgrade-container">
+            <div class="upgrade-area">
+                <div class="upgrade-slots">
+                    <div class="upgrade-slot" id="item-slot">
+                        <p style="color: #8b8ba7;">Selecciona un item de tu inventario</p>
+                    </div>
+                    <div class="upgrade-arrow">→</div>
+                    <div class="upgrade-slot" id="target-slot">
+                        <p style="color: #8b8ba7;">Item objetivo</p>
                     </div>
                 </div>
-                <div class="drop-prize">$1,250.00</div>
-            </div>
-            <div class="drop-item">
-                <div class="drop-user">
-                    <div class="drop-avatar">A</div>
-                    <div>
-                        <div style="font-weight: bold;">Ana_Gamer</div>
-                        <div style="color: #8b8ba7; font-size: 0.9rem;">Caja Legendaria</div>
+                <div class="success-rate">
+                    <h3 style="color: #667eea; margin-bottom: 0.5rem;">Probabilidad de Éxito</h3>
+                    <p style="font-size: 2rem; font-weight: bold;" id="success-percentage">0%</p>
+                    <div class="success-bar">
+                        <div class="success-fill" id="success-fill" style="width: 0%"></div>
                     </div>
                 </div>
-                <div class="drop-prize">$875.50</div>
-            </div>
-            <div class="drop-item">
-                <div class="drop-user">
-                    <div class="drop-avatar">L</div>
-                    <div>
-                        <div style="font-weight: bold;">LuckyStar</div>
-                        <div style="color: #8b8ba7; font-size: 0.9rem;">Caja Imperial</div>
-                    </div>
-                </div>
-                <div class="drop-prize">$2,100.00</div>
+                <button class="btn-primary" onclick="attemptUpgrade()" style="width: 100%; padding: 1rem; font-size: 1.2rem;" disabled id="upgrade-btn">Intentar Upgrade</button>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="features" id="features">
-        <h2 class="section-title">🎮 ¿POR QUÉ DROPEMPIRE?</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🛡️</div>
-                <div class="feature-title">100% Seguro</div>
-                <p style="color: #b8b8d4;">Transacciones protegidas y sistema anti-fraude avanzado</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <div class="feature-title">Retiros Instantáneos</div>
-                <p style="color: #b8b8d4;">Recibe tus premios al instante, sin esperas</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎁</div>
-                <div class="feature-title">Premios Épicos</div>
-                <p style="color: #b8b8d4;">Miles de skins y artículos exclusivos disponibles</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💯</div>
-                <div class="feature-title">Odds Justos</div>
-                <p style="color: #b8b8d4;">Probabilidades verificables y transparentes</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <div class="feature-title">Soporte 24/7</div>
-                <p style="color: #b8b8d4;">Equipo siempre disponible para ayudarte</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🌐</div>
-                <div class="feature-title">Comunidad Global</div>
-                <p style="color: #b8b8d4;">Únete a millones de jugadores en todo el mundo</p>
-            </div>
+    <!-- Inventory Section -->
+    <div class="app-container" id="inventory-section">
+        <div class="section-header">
+            <h2>🎒 INVENTARIO</h2>
         </div>
-    </section>
-
-    <footer class="footer">
-        <div style="font-size: 2rem; margin-bottom: 1rem;">💎 DROPEMPIRE</div>
-        <p style="color: #8b8ba7; margin-bottom: 1rem;">La mejor experiencia de case opening</p>
-        <p style="color: #666; font-size: 0.9rem;">© 2024 DropEmpire. Todos los derechos reservados.</p>
-        <p style="color: #666; font-size: 0.8rem; margin-top: 1rem;">+18 | Juega responsablemente</p>
-    </footer>
+        <div class="inventory-grid" id="inventory-grid"></div>
+    </div>
 
     <script>
-        // Animación de números en las estadísticas
-        function animateValue(id, start, end, duration, suffix = '') {
-            const element = document.getElementById(id);
-            const range = end - start;
-            const increment = range / (duration / 16);
-            let current = start;
-            
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= end) {
-                    element.textContent = end + suffix;
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(current).toLocaleString() + suffix;
-                }
-            }, 16);
+        // Game State
+        let gameState = {
+            loggedIn: false,
+            username: '',
+            balance: 0,
+            inventory: []
+        };
+
+        // Cases Data
+        const cases = [
+            { id: 1, name: 'Caja Starter', icon: '📦', price: 10, items: [
+                { name: 'Skin Común', icon: '🔵', value: 5, rarity: 'common' },
+                { name: 'Skin Común', icon: '🔵', value: 8, rarity: 'common' },
+                { name: 'Skin Raro', icon: '🟣', value: 15, rarity: 'rare' },
+                { name: 'Skin Épico', icon: '🟣', value: 25, rarity: 'epic' }
+            ]},
+            { id: 2, name: 'Caja Legendaria', icon: '🔥', price: 50, items: [
+                { name: 'Skin Raro', icon: '🟣', value: 30, rarity: 'rare' },
+                { name: 'Skin Épico', icon: '💜', value: 75, rarity: 'epic' },
+                { name: 'Skin Legendario', icon: '⭐', value: 150, rarity: 'legendary' },
+                { name: 'Skin Mítico', icon: '🌟', value: 300, rarity: 'legendary' }
+            ]},
+            { id: 3, name: 'Caja Elite', icon: '💎', price: 100, items: [
+                { name: 'Skin Épico', icon: '💜', value: 80, rarity: 'epic' },
+                { name: 'Skin Legendario', icon: '⭐', value: 200, rarity: 'legendary' },
+                { name: 'Skin Mítico', icon: '🌟', value: 500, rarity: 'legendary' },
+                { name: 'Skin Divino', icon: '✨', value: 1000, rarity: 'legendary' }
+            ]},
+            { id: 4, name: 'Caja Lightning', icon: '⚡', price: 30, items: [
+                { name: 'Skin Común', icon: '🔵', value: 15, rarity: 'common' },
+                { name: 'Skin Raro', icon: '🟣', value: 40, rarity: 'rare' },
+                { name: 'Skin Épico', icon: '💜', value: 90, rarity: 'epic' },
+                { name: 'Skin Legendario', icon: '⭐', value: 180, rarity: 'legendary' }
+            ]},
+            { id: 5, name: 'Caja Imperial', icon: '👑', price: 150, items: [
+                { name: 'Skin Legendario', icon: '⭐', value: 250, rarity: 'legendary' },
+                { name: 'Skin Mítico', icon: '🌟', value: 600, rarity: 'legendary' },
+                { name: 'Skin Divino', icon: '✨', value: 1200, rarity: 'legendary' },
+                { name: 'Skin Celestial', icon: '💫', value: 2500, rarity: 'legendary' }
+            ]},
+            { id: 6, name: 'Caja Estelar', icon: '🌟', price: 80, items: [
+                { name: 'Skin Raro', icon: '🟣', value: 50, rarity: 'rare' },
+                { name: 'Skin Épico', icon: '💜', value: 120, rarity: 'epic' },
+                { name: 'Skin Legendario', icon: '⭐', value: 300, rarity: 'legendary' },
+                { name: 'Skin Mítico', icon: '🌟', value: 700, rarity: 'legendary' }
+            ]}
+        ];
+
+        // Initialize
+        function init() {
+            renderCases();
+            updateBalance();
         }
 
-        // Simular nuevos drops en vivo
-        const nombres = ['Carlos', 'Sofia', 'Juan', 'Maria', 'Pedro', 'Laura', 'Diego', 'Elena'];
-        const cajas = ['Caja Elite', 'Caja Legendaria', 'Caja Imperial', 'Caja Estelar'];
-        
-        setInterval(() => {
-            const container = document.getElementById('drops-container');
-            const nombre = nombres[Math.floor(Math.random() * nombres.length)];
-            const caja = cajas[Math.floor(Math.random() * cajas.length)];
-            const premio = (Math.random() * 3000 + 100).toFixed(2);
-            const inicial = nombre.charAt(0);
+        // Login/Register
+        function showLoginModal() {
+            document.getElementById('login-modal').classList.add('active');
+        }
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
             
-            const newDrop = document.createElement('div');
-            newDrop.className = 'drop-item';
-            newDrop.innerHTML = `
-                <div class="drop-user">
-                    <div class="drop-avatar">${inicial}</div>
-                    <div>
-                        <div style="font-weight: bold;">${nombre}_${Math.floor(Math.random() * 999)}</div>
-                        <div style="color: #8b8ba7; font-size: 0.9rem;">${caja}</div>
+            if (username && password) {
+                gameState.loggedIn = true;
+                gameState.username = username;
+                gameState.balance = 5000;
+                document.getElementById('login-modal').classList.remove('active');
+                document.getElementById('login-btn').style.display = 'none';
+                document.getElementById('logout-btn').style.display = 'block';
+                document.getElementById('nav-menu').style.display = 'flex';
+                updateBalance();
+                showSection('cases');
+            }
+        }
+
+        function register() {
+            login(); // Simplified registration
+        }
+
+        function logout() {
+            gameState = { loggedIn: false, username: '', balance: 0, inventory: [] };
+            document.getElementById('login-btn').style.display = 'block';
+            document.getElementById('logout-btn').style.display = 'none';
+            document.getElementById('nav-menu').style.display = 'none';
+            showHome();
+        }
+
+        function showHome() {
+            document.querySelectorAll('.app-container').forEach(el => el.classList.remove('active'));
+            document.getElementById('home-section').style.display = 'flex';
+        }
+
+        function showSection(section) {
+            if (!gameState.loggedIn) {
+                showLoginModal();
+                return;
+            }
+            
+            document.getElementById('home-section').style.display = 'none';
+            document.querySelectorAll('.app-container').forEach(el => el.classList.remove('active'));
+            document.getElementById(section + '-section').classList.add('active');
+            
+            if (section === 'inventory') {
+                renderInventory();
+            }
+        }
+
+        function updateBalance() {
+            document.getElementById('user-balance').textContent = '$' + gameState.balance.toFixed(2);
+        }
+
+        // Render Cases
+        function renderCases() {
+            const grid = document.getElementById('cases-grid');
+            grid.innerHTML = cases.map(c => `
+                <div class="case-card" onclick="openCase(${c.id})">
+                    <div class="case-image">${c.icon}</div>
+                    <div class="case-name">${c.name}</div>
+                    <div class="case-price">$${c.price}</div>
+                    <button class="btn-primary" style="width: 100%;">ABRIR</button>
+                </div>
+            `).join('');
+        }
+
+        // Open Case
+        function openCase(caseId) {
+            const caseData = cases.find(c => c.id === caseId);
+            
+            if (gameState.balance < caseData.price) {
+                alert('Saldo insuficiente');
+                return;
+            }
+            
+            gameState.balance -= caseData.price;
+            updateBalance();
+            
+            // Show opening modal
+            document.getElementById('opening-modal').classList.add('active');
+            document.getElementById('result-container').classList.remove('active');
+            
+            // Generate roulette items
+            const rouletteItems = [];
+            for (let i = 0; i < 50; i++) {
+                const item = caseData.items[Math.floor(Math.random() * caseData.items.length)];
+                rouletteItems.push(item);
+            }
+            
+            // Pick winner (weighted)
+            const weights = [50, 30, 15, 5];
+            const random = Math.random() * 100;
+            let winnerIndex = 0;
+            let cumulative = 0;
+            for (let i = 0; i < weights.length; i++) {
+                cumulative += weights[i];
+                if (random <= cumulative) {
+                    winnerIndex = i;
+                    break;
+                }
+            }
+            const winner = caseData.items[winnerIndex];
+            rouletteItems[45] = winner;
+            
+            // Render roulette
+            const rouletteContainer = document.getElementById('roulette-items');
+            rouletteContainer.innerHTML = rouletteItems.map(item => `
+                <div class="roulette-item ${item.rarity}">
+                    <div class="item-icon">${item.icon}</div>
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-value">${item.value}</div>
+                </div>
+            `).join('');
+            
+            // Animate roulette
+            setTimeout(() => {
+                const offset = -(45 * 166) + (window.innerWidth / 2) - 75;
+                rouletteContainer.style.transform = `translateX(${offset}px)`;
+            }, 100);
+            
+            // Show result
+            setTimeout(() => {
+                gameState.inventory.push({ ...winner, id: Date.now() });
+                gameState.balance += winner.value;
+                updateBalance();
+                
+                document.getElementById('result-icon').textContent = winner.icon;
+                document.getElementById('result-name').textContent = winner.name;
+                document.getElementById('result-value').textContent = ' + winner.value;
+                document.getElementById('result-container').classList.add('active');
+            }, 3500);
+        }
+
+        function closeOpening() {
+            document.getElementById('opening-modal').classList.remove('active');
+            const rouletteContainer = document.getElementById('roulette-items');
+            rouletteContainer.style.transform = 'translateX(0)';
+            rouletteContainer.style.transition = 'none';
+            setTimeout(() => {
+                rouletteContainer.style.transition = 'transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99)';
+            }, 50);
+        }
+
+        // Battles
+        function startBattle(mode) {
+            const arena = document.getElementById('battle-arena');
+            arena.style.display = 'block';
+            
+            const opponents = mode === '1v1' ? 1 : mode === '2v2' ? 3 : Math.floor(Math.random() * 3) + 2;
+            const playerValue = Math.random() * 500 + 100;
+            const opponentValues = Array(opponents).fill(0).map(() => Math.random() * 500 + 100);
+            
+            setTimeout(() => {
+                const maxValue = Math.max(playerValue, ...opponentValues);
+                const winner = playerValue === maxValue ? gameState.username : 'Oponente';
+                
+                if (winner === gameState.username) {
+                    const prize = opponentValues.reduce((a, b) => a + b, 0);
+                    gameState.balance += prize;
+                    updateBalance();
+                    alert(`¡Ganaste! +${prize.toFixed(2)}`);
+                } else {
+                    gameState.balance -= playerValue;
+                    updateBalance();
+                    alert(`Perdiste -${playerValue.toFixed(2)}`);
+                }
+                
+                arena.style.display = 'none';
+            }, 3000);
+            
+            arena.innerHTML = `
+                <div class="battle-players">
+                    <div class="player-side">
+                        <div class="player-avatar">${gameState.username[0].toUpperCase()}</div>
+                        <h3>${gameState.username}</h3>
+                        <p style="color: #4ade80; font-size: 1.5rem; font-weight: bold;">${playerValue.toFixed(2)}</p>
+                    </div>
+                    <div class="vs-text">VS</div>
+                    <div class="player-side">
+                        <div class="player-avatar">🤖</div>
+                        <h3>Oponente</h3>
+                        <p style="color: #f87171; font-size: 1.5rem; font-weight: bold;">${opponentValues[0].toFixed(2)}</p>
                     </div>
                 </div>
-                <div class="drop-prize">$${premio}</div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <div style="font-size: 1.5rem; color: #667eea;">⚔️ Batalla en progreso...</div>
+                </div>
             `;
-            
-            container.insertBefore(newDrop, container.firstChild);
-            
-            if (container.children.length > 5) {
-                container.removeChild(container.lastChild);
-            }
-        }, 4000);
+        }
 
-        // Scroll suave
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+        // Upgrade System
+        let selectedUpgradeItem = null;
+
+        function renderInventory() {
+            const grid = document.getElementById('inventory-grid');
+            
+            if (gameState.inventory.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #8b8ba7; padding: 3rem;">Tu inventario está vacío. ¡Abre algunas cajas!</p>';
+                return;
+            }
+            
+            grid.innerHTML = gameState.inventory.map(item => `
+                <div class="inventory-item" onclick="selectItem(${item.id})">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">${item.icon}</div>
+                    <div style="font-size: 0.9rem; margin-bottom: 0.3rem;">${item.name}</div>
+                    <div style="color: #4ade80; font-weight: bold;">${item.value}</div>
+                </div>
+            `).join('');
+        }
+
+        function selectItem(itemId) {
+            const item = gameState.inventory.find(i => i.id === itemId);
+            
+            if (document.getElementById('upgrade-section').classList.contains('active')) {
+                // Selecting for upgrade
+                selectedUpgradeItem = item;
+                document.getElementById('item-slot').innerHTML = `
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">${item.icon}</div>
+                    <div style="font-size: 1rem; margin-bottom: 0.3rem;">${item.name}</div>
+                    <div style="color: #4ade80; font-weight: bold;">${item.value}</div>
+                `;
+                
+                // Generate target item (higher value)
+                const targetValue = item.value * (Math.random() * 1.5 + 1.5);
+                const successRate = Math.max(10, Math.min(90, (item.value / targetValue) * 100));
+                
+                const rarities = ['common', 'rare', 'epic', 'legendary'];
+                const rarityIndex = Math.min(3, rarities.indexOf(item.rarity) + 1);
+                const targetRarity = rarities[rarityIndex];
+                
+                const icons = { common: '🔵', rare: '🟣', epic: '💜', legendary: '⭐' };
+                
+                selectedUpgradeItem.target = {
+                    name: item.name + ' Mejorado',
+                    icon: icons[targetRarity],
+                    value: targetValue,
+                    rarity: targetRarity,
+                    successRate: successRate
+                };
+                
+                document.getElementById('target-slot').innerHTML = `
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">${selectedUpgradeItem.target.icon}</div>
+                    <div style="font-size: 1rem; margin-bottom: 0.3rem;">${selectedUpgradeItem.target.name}</div>
+                    <div style="color: #4ade80; font-weight: bold;">${selectedUpgradeItem.target.value.toFixed(2)}</div>
+                `;
+                
+                document.getElementById('success-percentage').textContent = successRate.toFixed(1) + '%';
+                document.getElementById('success-fill').style.width = successRate + '%';
+                document.getElementById('upgrade-btn').disabled = false;
+            } else {
+                // Selecting in inventory
+                document.querySelectorAll('.inventory-item').forEach(el => el.classList.remove('selected'));
+                event.target.closest('.inventory-item').classList.add('selected');
+            }
+        }
+
+        function attemptUpgrade() {
+            if (!selectedUpgradeItem) return;
+            
+            const success = Math.random() * 100 <= selectedUpgradeItem.target.successRate;
+            
+            // Remove original item
+            gameState.inventory = gameState.inventory.filter(i => i.id !== selectedUpgradeItem.id);
+            
+            if (success) {
+                // Add upgraded item
+                gameState.inventory.push({
+                    ...selectedUpgradeItem.target,
+                    id: Date.now()
+                });
+                alert(`¡Éxito! Has obtenido ${selectedUpgradeItem.target.name}`);
+            } else {
+                alert(`¡Fallaste! Has perdido ${selectedUpgradeItem.name}`);
+            }
+            
+            // Reset upgrade UI
+            selectedUpgradeItem = null;
+            document.getElementById('item-slot').innerHTML = '<p style="color: #8b8ba7;">Selecciona un item de tu inventario</p>';
+            document.getElementById('target-slot').innerHTML = '<p style="color: #8b8ba7;">Item objetivo</p>';
+            document.getElementById('success-percentage').textContent = '0%';
+            document.getElementById('success-fill').style.width = '0%';
+            document.getElementById('upgrade-btn').disabled = true;
+            
+            renderInventory();
+        }
+
+        // Initialize on load
+        init();
     </script>
 </body>
 </html>
